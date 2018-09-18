@@ -1,0 +1,64 @@
+<!-- Build a flip counter that counts a minute (0-59) iteratively.
+If you can, try and minimize the creation of new DOM elements in runtime,
+ by reusing the same elements. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flip Counter</title>
+    <style>
+    /* --------------------
+     Add your styling here
+     -------------------- */
+     .clock {
+         font-size: 60px;
+     }
+     #time {
+         font-size: 100px;
+     }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <!----------------------
+    Add your markup here
+    ------------------------>
+    <span class="clock">01</span>
+    <div id="time"></div>
+
+
+
+</div>
+<script>
+    function runClock() {
+        let time = document.getElementById("time")
+        
+        let i = 0
+        setInterval(()=> {
+            while (i < 10) {
+                let wrapper = document.createElement("div")
+                let sec = document.createTextNode(i)
+                wrapper.appendChild(sec)
+                time.appendChild(wrapper)
+                time.removeChild(wrapper)
+                i++
+            }
+        }, 1000)
+        
+    }
+    function increment(i) {
+        setInterval(()=> {
+                let sec = document.createTextNode(i)
+                time.appendChild(sec)
+            }, 1000)
+    }
+    runClock()
+    
+    /* --------------------
+     Add your code here
+    --------------------- */
+</script>
+</body>
+</html>
