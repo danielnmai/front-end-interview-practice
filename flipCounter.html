@@ -11,9 +11,6 @@ If you can, try and minimize the creation of new DOM elements in runtime,
     /* --------------------
      Add your styling here
      -------------------- */
-     .clock {
-         font-size: 60px;
-     }
      #time {
          font-size: 100px;
      }
@@ -25,37 +22,24 @@ If you can, try and minimize the creation of new DOM elements in runtime,
     <!----------------------
     Add your markup here
     ------------------------>
-    <span class="clock">01</span>
     <div id="time"></div>
-
-
-
 </div>
-<script>
-    function runClock() {
-        let time = document.getElementById("time")
-        
-        let i = 0
-        setInterval(()=> {
-            while (i < 10) {
-                let wrapper = document.createElement("div")
-                let sec = document.createTextNode(i)
-                wrapper.appendChild(sec)
-                time.appendChild(wrapper)
-                time.removeChild(wrapper)
-                i++
-            }
-        }, 1000)
-        
+<script>    
+    let time = document.getElementById("time")
+    let seconds = 0
+    setInterval(setTime, 1000)
+    function setTime() {
+        ++seconds;
+        time.innerHTML = format(seconds)
     }
-    function increment(i) {
-        setInterval(()=> {
-                let sec = document.createTextNode(i)
-                time.appendChild(sec)
-            }, 1000)
-    }
-    runClock()
-    
+
+    function format(sec) {
+        let num  = sec % 60
+        let strNum = ''
+        num < 10 ? strNum = '0' + num : strNum = num + ''
+
+        return strNum
+    }    
     /* --------------------
      Add your code here
     --------------------- */
